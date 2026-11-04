@@ -1,0 +1,325 @@
+:root {
+  --bg: #eef3f8;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #bcc9d8;
+  --accent: #0f83ff;
+  --accent-dark: #0567c2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 0%, #dbeafe 0%, transparent 55%),
+    radial-gradient(circle at 95% 100%, #d1fae5 0%, transparent 50%),
+    var(--bg);
+}
+
+.page {
+  width: min(1180px, 94vw);
+  margin: 16px auto;
+  display: grid;
+  gap: 10px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
+  font-weight: 800;
+}
+
+.topbar p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.map-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+}
+
+.path-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+}
+
+.field label {
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.field select {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+}
+
+#findPathBtn {
+  border: 0;
+  background: #0ea5a4;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+#findPathBtn:hover {
+  background: #0b8686;
+  transform: translateY(-1px);
+}
+
+.path-options {
+  margin-bottom: 10px;
+}
+
+.instruction-card {
+  margin-bottom: 10px;
+  border: 1px solid #dbe4ef;
+  border-radius: 12px;
+  background: #f9fcff;
+  padding: 10px 12px;
+}
+
+.instruction-list {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: #1e293b;
+}
+
+.instruction-list li {
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.instruction-list.empty {
+  list-style: none;
+  padding-left: 0;
+  color: var(--muted);
+}
+
+.path-list {
+  display: grid;
+  gap: 8px;
+}
+
+.path-item {
+  width: 100%;
+  border: 1px solid #bfdbfe;
+  background: #f0f7ff;
+  color: #0f172a;
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.path-item:hover {
+  border-color: #7fb3ff;
+  background: #e6f1ff;
+}
+
+.path-item.active {
+  border-color: #0f83ff;
+  background: #dcebff;
+}
+
+.path-item .title {
+  display: block;
+  font-weight: 700;
+}
+
+.path-item .meta {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.path-empty {
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--muted);
+  background: #fbfdff;
+}
+
+.arrival-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.45);
+  padding: 16px;
+  z-index: 40;
+}
+
+.arrival-popup.show {
+  display: grid;
+}
+
+.arrival-content {
+  width: min(420px, 100%);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.2);
+}
+
+.arrival-content h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.arrival-content p {
+  margin: 8px 0 14px;
+  color: #334155;
+}
+
+#closeArrivalBtn {
+  border: 0;
+  background: #0f83ff;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 9px 14px;
+  cursor: pointer;
+}
+
+.status-row {
+  display: grid;
+  gap: 10px;
+  align-items: center;
+  grid-template-columns: 1fr 1fr auto;
+  margin-bottom: 8px;
+}
+
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+  margin-bottom: 2px;
+}
+
+#clearTrailBtn {
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+#clearTrailBtn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.canvas-wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 20%, #d8ecff 0%, transparent 36%),
+    linear-gradient(180deg, #f3f8ff 0%, #eaf5ef 100%);
+}
+
+#mapCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.map-controls {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.map-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  border-radius: 10px;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.destination-strip {
+  margin-top: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #fbfdff;
+  padding: 8px 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.pin {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  color: #0a84ff;
+  background: #e8f2ff;
+}
+
+.dest-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 860px) {
+  .path-selector {
+    grid-template-columns: 1fr;
+  }
+
+  #findPathBtn {
+    width: 100%;
+  }
+
+  .status-row {
+    grid-template-columns: 1fr;
+  }
+
+  #clearTrailBtn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indoor Navigation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <h1>Indoor Navigation</h1>
+        <p>
+          Live RSSI position 
+      </header>
+
+      <section class="map-card">
+        <div class="path-selector">
+          <div class="field">
+            <label for="fromSelect">From</label>
+            <select id="fromSelect"></select>
+          </div>
+          <div class="field">
+            <label for="toSelect">To</label>
+            <select id="toSelect"></select>
+          </div>
+          <button id="findPathBtn" type="button">Find path</button>
+        </div>
+
+        <div class="path-options">
+          <span class="label">Available paths</span>
+          <div id="pathList" class="path-list"></div>
+        </div>
+
+        <div class="status-row">
+          <div>
+            <span class="label">Current zone</span>
+            <strong id="roomName">Waiting for RSSI updates...</strong>
+          </div>
+          <div>
+            <span class="label">Predicted coordinates</span>
+            <strong id="coords">-</strong>
+          </div>
+          <button id="clearTrailBtn" type="button">Clear trail</button>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="mapCanvas" aria-label="Indoor navigation map"></canvas>
+          <div class="map-controls" aria-hidden="true">
+            <button type="button">+</button>
+            <button type="button">-</button>
+          </div>
+        </div>
+
+        <div class="destination-strip">
+          <div class="pin">●</div>
+          <div>
+            <div class="dest-label">Destination</div>
+            <strong id="destinationText">Corridor Navigation Active</strong>
+          </div>
+        </div>
+
+        <div class="instruction-card">
+          <span class="label">Navigation instructions</span>
+          <ol id="instructionList" class="instruction-list"></ol>
+        </div>
+      </section>
+    </main>
+
+    <div id="arrivalPopup" class="arrival-popup" aria-hidden="true">
+      <div
+        class="arrival-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="arrivalTitle"
+      >
+        <h2 id="arrivalTitle">Destination reached</h2>
+        <p id="arrivalText">You have reached your destination.</p>
+        <button id="closeArrivalBtn" type="button">Close</button>
+      </div>
+    </div>
+
+    <script>
+      window.MAP_BOUNDS = {{ bounds | tojson }};
+    </script>
+    <script>
+      (function () {
+        const sb = Date.now();
+        document.write('<script src="/static/app.js?v=' + sb + '"><\/script>');
+      })();
+    </script>
+  </body>
+</html>
